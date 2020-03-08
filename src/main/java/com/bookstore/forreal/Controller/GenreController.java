@@ -13,17 +13,20 @@ import java.util.Optional;
 public class GenreController {
     @Autowired
     GenreService service;
+
     @GetMapping("/Genre/get")
     public List<Genre> getAllGenre()
     {
         return service.findAll();
     }
+
     @GetMapping("/Genre/get/{id}")
     public Optional<Genre> getGenreById(@PathVariable("id") int id)
     {
         if (!service.existById(id)) return null;
         return service.findById(id);
     }
+
     @PostMapping("/Genre/post")
     public void addGenre(@RequestBody Genre newgenre)
     {
@@ -32,9 +35,11 @@ public class GenreController {
         {
             if (ele == newgenre) return;
         }
+        newgenre.setGenreId(newgenre.hashCode());
         newgenre.setCreatedDate(new Date());
         service.Save(newgenre);
     }
+
     @PutMapping("/Genre/put/{id}")
     public void modifyGenre(@PathVariable("id") int id,@RequestBody Genre modifiedgenre)
     {
@@ -48,6 +53,7 @@ public class GenreController {
         thisgenre.setModifiledDate(new Date());
         service.Save(thisgenre);
     }
+
     @DeleteMapping("/Genre/delete/{id}")
     public void deleteGenre(@PathVariable("id") int id)
     {

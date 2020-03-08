@@ -13,16 +13,19 @@ import java.util.Optional;
 public class BookController {
     @Autowired
     BookService service;
+
     @GetMapping("/Book/get")
     public List<Book> getAllBook()
     {
         return service.findAll();
     }
+
     @GetMapping("/Book/get/{id}")
     public Optional<Book> getBookById(@PathVariable("id") int id)
     {
         return service.findById(id);
     }
+
     @PostMapping("/Book/post")
     public void addBook(@RequestBody Book newBook)
     {
@@ -31,9 +34,11 @@ public class BookController {
         {
             if (ele == newBook) return;
         }
+        newBook.setBookId(newBook.hashCode());
         newBook.setCreatedDate(new Date());
         service.Save(newBook);
     }
+
     @PutMapping("/Book/put/{id}")
     public void modifyBook(@PathVariable("id") int id, @RequestBody Book modifiedbook)
     {
@@ -51,6 +56,7 @@ public class BookController {
 
         service.Save(thisbook);
     }
+    
     @DeleteMapping("/Book/delete/{id}")
     public void deleteBook(@PathVariable("id") int id)
     {

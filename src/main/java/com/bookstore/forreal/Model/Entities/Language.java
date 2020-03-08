@@ -16,6 +16,8 @@ public class Language {
     List<Book> books;
     @Column
     Date createdDate;
+    @Column
+    Date modifiledDate;
 
     public Date getCreatedDate() {
         return createdDate;
@@ -33,8 +35,7 @@ public class Language {
         this.modifiledDate = modifiledDate;
     }
 
-    @Column
-    Date modifiledDate;
+
 
     public Language() {
     }

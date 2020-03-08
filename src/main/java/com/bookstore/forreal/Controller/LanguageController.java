@@ -30,7 +30,7 @@ public class LanguageController {
         for (Language ele:tmpLanguages) {
             if (ele == newLanguage) return;
         }
-
+        newLanguage.setLangId(newLanguage.hashCode());
         newLanguage.setCreatedDate(new Date());
         service.Save(newLanguage);
     }
